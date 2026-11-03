@@ -35,7 +35,7 @@ unsigned short stack[16]; // PILA
 unsigned short sp;        // Puntero de la posicion en la PILA
 unsigned short key[16];
 unsigned char gfx[64 * 32];
-phtread_t thread;
+pthread_t thread;
 
 void initialize(void) {
 
@@ -188,6 +188,127 @@ void emulateCycle() {
     break;
   }
 
+  case 0x8000: {
+    switch (opcode & 0x000F) {
+    case 0x0001: {
+      break;
+    }
+    case 0x0002: {
+      break;
+    }
+    case 0x0003: {
+      break;
+    }
+    case 0x0004: {
+      break;
+    }
+    case 0x0005: {
+      break;
+    }
+    case 0x0006: {
+      break;
+    }
+    case 0x0007: {
+      break;
+    }
+    case 0x000E: {
+      break;
+    }
+    }
+    break;
+  }
+
+  case 0x9000: {
+    int n = opcode & 0x000F;
+    int x = (opcode & 0x0F00) >> 8;
+    int y = (opcode & 0x00F0) >> 4;
+    if (n == 0) {
+      if (V[x] != V[y]) {
+        pc++;
+      }
+    }
+
+    break;
+  }
+
+  case 0xE000: {
+    switch (opcode & 0x000F) {
+    case 0x000E: {
+      int n = (opcode & 0x00F0) >> 4;
+      int x = (opcode & 0x0F00) >> 8;
+      if (n == 9) {
+        // Si valor de V[x] coincide con la tecla presionada, se salta a la
+        // siguiente instruccio
+      }
+      break;
+    }
+
+    case 0x0001: {
+      int n = (opcode & 0x00F0) >> 4;
+      int x = (opcode & 0x0F00) >> 8;
+
+      if (n == 0xA) {
+        // Espera por una tecla presionada y la almacena en el registro
+      }
+
+      break;
+    }
+    }
+    break;
+  }
+
+  case 0xF000: {
+    switch (opcode & 0x000F) {
+    case 0x0007: {
+      int x = (opcode & 0x0F00) >> 8;
+      V[x] = delay_timer;
+      break;
+    }
+    case 0x000A: {
+
+      break;
+    }
+    case 0x000E: {
+      int x = (opcode & 0x0F00) >> 8;
+      I = I + V[x];
+      break;
+    }
+    case 0x0005: {
+      switch ((opcode & 0x00F0) >> 4) {
+
+      case 0x0010: { // Establecer delay timer a la posicion Vx
+        int x = (opcode & 0x0F00) >> 8;
+        delay_timer = V[x];
+        break;
+      }
+      case 0x0050: {
+        break;
+      }
+      case 0x0060: {
+        break;
+      }
+      }
+      break;
+    }
+    case 0x0008: {
+      int x = (opcode & 0x0F00) >> 8;
+      sound_timer = V[x];
+      break;
+    }
+    case 0x000E: {
+      int x = (opcode & 0x0F00) >> 8;
+      I += V[x];
+      break;
+    }
+    case 0x0009: {
+
+      break;
+    }
+    case 0x0003: {
+      break;
+    }
+    }
+
   case 0x0000: // opcodes que se deduciran con los ultimos 4 bits osea la ultima
                // letra
     switch (opcode & 0x000F) {
@@ -203,5 +324,6 @@ void emulateCycle() {
   }
 
   break;
+  }
   }
 }
