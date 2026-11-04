@@ -11,6 +11,7 @@ target_sources(Chip8
 	 index.c	
 	 graphics.c
 	 utils.c
+	 chip8.c
 )
 
 

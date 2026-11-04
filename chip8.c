@@ -171,6 +171,8 @@ void emulateCycle() {
   }
 
   case 0x6000: {
+    // FX55 Almacena el contenido de V0 a VX en la memoria empezando por la
+    // dirección I
     int x = (opcode & 0x0F00) >> 8;
     int kk = opcode & 0x00FF;
 
@@ -190,10 +192,23 @@ void emulateCycle() {
 
   case 0x8000: {
     switch (opcode & 0x000F) {
-    case 0x0001: {
+    case 0x0000: {
+      int x = (opcode & 0x0F00) >> 8;
+      int y = (opcode & 0x00F0) >> 4;
+      V[x] = V[y];
       break;
     }
-    case 0x0002: {
+    case 0x0001: { // bitwise OR
+      int x = (opcode & 0x0F00) >> 8;
+      int y = (opcode & 0x00F0) >> 4;
+      V[x] = V[x] | V[y];
+
+      break;
+    }
+    case 0x0002: { // bitwise AND
+      int x = (opcode & 0x0F00) >> 8;
+      int y = (opcode & 0x00F0) >> 4;
+      V[x] = V[x] & V[y];
       break;
     }
     case 0x0003: {
@@ -224,7 +239,7 @@ void emulateCycle() {
     int y = (opcode & 0x00F0) >> 4;
     if (n == 0) {
       if (V[x] != V[y]) {
-        pc++;
+        pc += 2;
       }
     }
 
@@ -295,18 +310,14 @@ void emulateCycle() {
       sound_timer = V[x];
       break;
     }
-    case 0x000E: {
-      int x = (opcode & 0x0F00) >> 8;
-      I += V[x];
-      break;
-    }
+
     case 0x0009: {
 
       break;
     }
     case 0x0003: {
       break;
-    }
+    } break;
     }
 
   case 0x0000: // opcodes que se deduciran con los ultimos 4 bits osea la ultima
