@@ -24,16 +24,35 @@ Me base en la informacion que proporciona wikipedia y otras fuentes sobre lo que
 
 ## MEMORIA
 
+La memoria del chip-8 es de 8,548 bytes, teniendo un rango desde 200h a FFFh
+
 ## REGISTROS
+
+Chip-8 cuenta con 16 registros de 8-bits, para datos, se suelen llamar V0, V1, V2, etc.
 
 ## PILA O STACK
 
+La pila del chip-8 se usa para almacenar direcciones que seran usadas luego, al regresar de una subrutina
+
 ## TIMERS
+
+El chip-8 cuenta con dos timers:
+
+1. Sound Timer: Consiste en un temporizador usado para el sonido del juego, cuando el sonido no es 0, se escucha un beep
+
+2. Delay Timer: Temporizador usado para sincronizar los eventos del juego
 
 ## INPUT
 
+EL chip-8 cuenta con un teclado de 16 teclas en un rango de 0 a F
+
 ## GRAFICOS Y SONIDO
+
+La resolucion estandar de pantalla es de 64 * 32 pixeles, solo cuenta con dos colores, osea que es monocromo.
+
+Los sprites del chip-8 son de 8 pixeles de ancho por 1 a 15 de alto
 
 ## OPCODES
 
+Los opcodes en el chip-8 son las instrucciones que es capaz de detectar y "ejecutar" dentro de el, cuenta con tan solo 35, usadas para distintos propositos cada una, desde solo cambiar el valor de un registro por ejemplo, hasta recibir el input del usuario y "mapearlo"
 

@@ -35,7 +35,6 @@ unsigned short stack[16]; // PILA
 unsigned short sp;        // Puntero de la posicion en la PILA
 unsigned short key[16];
 unsigned char gfx[64 * 32];
-pthread_t thread;
 
 void initialize(void) {
 
@@ -45,11 +44,12 @@ void initialize(void) {
   opcode = 0;
   I = 0;
   sp = 0;
+  delay_timer = 0;
+  sound_timer = 0;
 
   // limpiar pantalla
   // limpiar el stack limpiar los registros del v0 al vf
   // limpiar memoria
-
   // fetch opcode
 
   for (int i = 0; i < 80;
@@ -60,25 +60,17 @@ void initialize(void) {
   }
 }
 
-void timers() {
-  // reducir timers 60 veces por segundo
-  // osea una vez cada milisegundo
-
-  struct timespec espera;
-  espera.tv_sec = 0;
-  espera.tv_nsec = 1000000; // 1 milisegundo
-
-  while (sound_timer > 0 || delay_timer > 0) {
-
-    nanosleep(&espera, NULL);
-
-    delay_timer = delay_timer - 16.6666667;
-    sound_timer = sound_timer - 16.6666667;
+void timers() { // esta función solo se encargará de restar en 1 a los timers si
+                // son mayores a 0
+  if (delay_timer > 0) {
+    delay_timer--;
+  }
+  if (sound_timer > 0) {
+    sound_timer--;
   }
 }
 
-void loadGame() { // cargar el juego
-
+bool loadGame() { // cargar el juego
   long bufferSize;
 
   FILE *file =
@@ -95,12 +87,15 @@ void loadGame() { // cargar el juego
   int *buffer = malloc(bufferSize); // buffer creado con la capacidad del juego
                                     // Leer el juego y guardarlo en buffer
 
-  fread(buffer, 1, bufferSize,
-        file); // donde se guarda: buffer, el tamaño de cada elemento
-               // individual: 1 byte, el total de elementos: buffersize, file es
-               // el puntero al archivo
+  rewind(file);
+  size_t read =
+      fread(buffer, 1, bufferSize,
+            file); // donde se guarda: buffer, el tamaño de cada elemento
+                   // individual: 1 byte, el total de elementos: buffersize,
+                   // file es el puntero al archivo
 
   // retornar el buffer
+  return read == (size_t)bufferSize;
 }
 
 void emulateCycle() {
@@ -142,6 +137,7 @@ void emulateCycle() {
     int x = (opcode & 0x0F00) >> 8; // solo obtener x
     int nn = opcode & 0x00FF;       // solo obtener los ultimos dos
 
+    pc += 2;
     if (V[x] == nn) {
       pc += 2;
     }
@@ -152,6 +148,7 @@ void emulateCycle() {
     int x = (opcode & 0x0F00) >> 8; // solo obtener x
     int kk = opcode & 0x00FF;       // solo obtener los ultimos dos
 
+    pc += 2;
     if (V[x] != kk) {
       pc += 2;
     }
@@ -163,6 +160,7 @@ void emulateCycle() {
     int y = (opcode & 0x00F0) >> 4;
     int n = opcode & 0x000F;
 
+    pc += 2;
     if (n == 0 & V[x] == V[y]) {
       pc += 2;
     }
@@ -177,6 +175,7 @@ void emulateCycle() {
     int kk = opcode & 0x00FF;
 
     V[x] = kk;
+    pc += 2;
 
     break;
   }
@@ -186,6 +185,7 @@ void emulateCycle() {
     int kk = opcode & 0x00FF;
 
     V[x] += kk;
+    pc += 2;
 
     break;
   }
@@ -196,12 +196,14 @@ void emulateCycle() {
       int x = (opcode & 0x0F00) >> 8;
       int y = (opcode & 0x00F0) >> 4;
       V[x] = V[y];
+      pc += 2;
       break;
     }
     case 0x0001: { // bitwise OR
       int x = (opcode & 0x0F00) >> 8;
       int y = (opcode & 0x00F0) >> 4;
       V[x] = V[x] | V[y];
+      pc += 2;
 
       break;
     }
@@ -209,24 +211,31 @@ void emulateCycle() {
       int x = (opcode & 0x0F00) >> 8;
       int y = (opcode & 0x00F0) >> 4;
       V[x] = V[x] & V[y];
+      pc += 2;
       break;
     }
     case 0x0003: {
+      pc += 2;
       break;
     }
     case 0x0004: {
+      pc += 2;
       break;
     }
     case 0x0005: {
+      pc += 2;
       break;
     }
     case 0x0006: {
+      pc += 2;
       break;
     }
     case 0x0007: {
+      pc += 2;
       break;
     }
     case 0x000E: {
+      pc += 2;
       break;
     }
     }
@@ -237,6 +246,7 @@ void emulateCycle() {
     int n = opcode & 0x000F;
     int x = (opcode & 0x0F00) >> 8;
     int y = (opcode & 0x00F0) >> 4;
+    pc += 2;
     if (n == 0) {
       if (V[x] != V[y]) {
         pc += 2;
@@ -251,6 +261,7 @@ void emulateCycle() {
     case 0x000E: {
       int n = (opcode & 0x00F0) >> 4;
       int x = (opcode & 0x0F00) >> 8;
+      pc += 2;
       if (n == 9) {
         // Si valor de V[x] coincide con la tecla presionada, se salta a la
         // siguiente instruccio
@@ -262,6 +273,7 @@ void emulateCycle() {
       int n = (opcode & 0x00F0) >> 4;
       int x = (opcode & 0x0F00) >> 8;
 
+      pc += 2;
       if (n == 0xA) {
         // Espera por una tecla presionada y la almacena en el registro
       }
@@ -277,6 +289,7 @@ void emulateCycle() {
     case 0x0007: {
       int x = (opcode & 0x0F00) >> 8;
       V[x] = delay_timer;
+      pc += 2;
       break;
     }
     case 0x000A: {
@@ -286,6 +299,7 @@ void emulateCycle() {
     case 0x000E: {
       int x = (opcode & 0x0F00) >> 8;
       I = I + V[x];
+      pc += 2;
       break;
     }
     case 0x0005: {
@@ -294,12 +308,15 @@ void emulateCycle() {
       case 0x0010: { // Establecer delay timer a la posicion Vx
         int x = (opcode & 0x0F00) >> 8;
         delay_timer = V[x];
+        pc += 2;
         break;
       }
       case 0x0050: {
+        pc += 2;
         break;
       }
       case 0x0060: {
+        pc += 2;
         break;
       }
       }
@@ -308,14 +325,16 @@ void emulateCycle() {
     case 0x0008: {
       int x = (opcode & 0x0F00) >> 8;
       sound_timer = V[x];
+      pc += 2;
       break;
     }
 
     case 0x0009: {
-
+      pc += 2;
       break;
     }
     case 0x0003: {
+      pc += 2;
       break;
     } break;
     }
@@ -331,6 +350,7 @@ void emulateCycle() {
 
   case 0x000E: {
     // LIMPIAR PANTALLA
+    pc += 2;
     break;
   }
 
