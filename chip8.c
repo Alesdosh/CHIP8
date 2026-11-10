@@ -47,10 +47,11 @@ void initialize(void) {
   delay_timer = 0;
   sound_timer = 0;
 
-  // limpiar pantalla
-  // limpiar el stack limpiar los registros del v0 al vf
-  // limpiar memoria
-  // fetch opcode
+  memset(gfx, 0, sizeof gfx);
+  memset(stack, 0, sizeof stack);
+  memset(V, 0, sizeof V);
+  memset(key, 0, sizeof key);
+  memset(memory, 0, sizeof memory);
 
   for (int i = 0; i < 80;
        i++) { // cargar el fontset en memoria, cada caracter ocupa 5 bytes, es
@@ -58,6 +59,8 @@ void initialize(void) {
         chip8_fontset[i]; // por eso que se carga el fontset hasta 80 bytes,
                           // porque todo el fontset inicial es de 16 caracteres
   }
+
+  srand((unsigned)time(NULL));
 }
 
 void timers() { // esta función solo se encargará de restar en 1 a los timers si
@@ -70,7 +73,7 @@ void timers() { // esta función solo se encargará de restar en 1 a los timers 
   }
 }
 
-bool loadGame() { // cargar el juego
+void loadGame() { // cargar el juego
   long bufferSize;
 
   FILE *file =
@@ -84,18 +87,9 @@ bool loadGame() { // cargar el juego
 
   bufferSize = ftell(file);
 
-  int *buffer = malloc(bufferSize); // buffer creado con la capacidad del juego
-                                    // Leer el juego y guardarlo en buffer
-
   rewind(file);
-  size_t read =
-      fread(buffer, 1, bufferSize,
-            file); // donde se guarda: buffer, el tamaño de cada elemento
-                   // individual: 1 byte, el total de elementos: buffersize,
-                   // file es el puntero al archivo
-
-  // retornar el buffer
-  return read == (size_t)bufferSize;
+  fread(memory + 0x200, 1, bufferSize, file);
+  fclose(file);
 }
 
 void emulateCycle() {

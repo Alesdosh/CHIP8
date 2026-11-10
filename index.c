@@ -8,12 +8,6 @@
 int main(void) {
 
   initialize(); // inicialización de chip8
+  loadGame();   // cargar juego
   graphics();   // graficos e input inicializados
-
-  srand((unsigned)time(
-      NULL)); // inicializador de la semilla para numeros aleatorios
-
-  bool correr = true;
-  while (correr) { // Proceso de ejecución
-  }
 }
