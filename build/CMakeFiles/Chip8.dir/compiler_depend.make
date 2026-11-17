@@ -145,39 +145,6 @@ CMakeFiles/Chip8.dir/index.c.o: /home/ales/Documentos/CHIP8/index.c \
   /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h \
   /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h
 
-CMakeFiles/Chip8.dir/utils.c.o: /home/ales/Documentos/CHIP8/utils.c \
-  /home/ales/Documentos/CHIP8/utils.h \
-  /usr/include/bits/floatn-common.h \
-  /usr/include/bits/floatn.h \
-  /usr/include/bits/libc-header-start.h \
-  /usr/include/bits/long-double.h \
-  /usr/include/bits/stdio_lim.h \
-  /usr/include/bits/time64.h \
-  /usr/include/bits/timesize.h \
-  /usr/include/bits/types.h \
-  /usr/include/bits/types/FILE.h \
-  /usr/include/bits/types/__FILE.h \
-  /usr/include/bits/types/__fpos64_t.h \
-  /usr/include/bits/types/__fpos_t.h \
-  /usr/include/bits/types/__locale_t.h \
-  /usr/include/bits/types/__mbstate_t.h \
-  /usr/include/bits/types/cookie_io_functions_t.h \
-  /usr/include/bits/types/locale_t.h \
-  /usr/include/bits/types/struct_FILE.h \
-  /usr/include/bits/typesizes.h \
-  /usr/include/bits/wordsize.h \
-  /usr/include/features-time64.h \
-  /usr/include/features.h \
-  /usr/include/gnu/stubs-64.h \
-  /usr/include/gnu/stubs.h \
-  /usr/include/stdc-predef.h \
-  /usr/include/stdio.h \
-  /usr/include/string.h \
-  /usr/include/strings.h \
-  /usr/include/sys/cdefs.h \
-  /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h \
-  /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h
-
 Chip8: /lib64/ld-linux-x86-64.so.2 \
   /lib64/libc.so.6 \
   /lib64/libgcc_s.so.1 \
@@ -198,8 +165,6 @@ Chip8: /lib64/ld-linux-x86-64.so.2 \
 
 
 CMakeFiles/Chip8.dir/utils.c.o:
-
-CMakeFiles/Chip8.dir/index.c.o:
 
 /usr/include/SDL3/SDL_time.h:
 
@@ -252,6 +217,10 @@ CMakeFiles/Chip8.dir/index.c.o:
 /usr/include/SDL3/SDL_hidapi.h:
 
 /usr/include/SDL3/SDL_atomic.h:
+
+/usr/include/SDL3/SDL_mouse.h:
+
+/usr/include/bits/stdint-least.h:
 
 /usr/include/SDL3/SDL_keyboard.h:
 
@@ -409,12 +378,6 @@ CMakeFiles/Chip8.dir/index.c.o:
 
 /usr/include/stdio.h:
 
-/usr/include/SDL3/SDL_mouse.h:
-
-/usr/include/bits/stdint-least.h:
-
-/home/ales/Documentos/CHIP8/utils.c:
-
 /usr/include/strings.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/crtend.o:
@@ -436,6 +399,8 @@ CMakeFiles/Chip8.dir/index.c.o:
 /lib64/ld-linux-x86-64.so.2:
 
 /lib64/libgcc_s.so.1:
+
+CMakeFiles/Chip8.dir/index.c.o:
 
 /usr/lib64/crti.o:
 

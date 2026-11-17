@@ -1,6 +1,6 @@
 CMakeFiles/Chip8.dir/graphics.c.o: /home/ales/Documentos/CHIP8/graphics.c \
  /usr/include/stdc-predef.h /home/ales/Documentos/CHIP8/graphics.h \
- /home/ales/Documentos/CHIP8/utils.h /usr/include/SDL3/SDL.h \
+ /home/ales/Documentos/CHIP8/chip8.h /usr/include/SDL3/SDL.h \
  /usr/include/SDL3/SDL_stdinc.h /usr/include/SDL3/SDL_platform_defines.h \
  /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h \
  /usr/include/string.h /usr/include/bits/libc-header-start.h \

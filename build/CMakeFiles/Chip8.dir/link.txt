@@ -1,1 +1,1 @@
-/usr/bin/cc -Wl,--dependency-file=CMakeFiles/Chip8.dir/link.d CMakeFiles/Chip8.dir/index.c.o CMakeFiles/Chip8.dir/graphics.c.o CMakeFiles/Chip8.dir/utils.c.o -o Chip8  /usr/lib64/libSDL3.so.0.4.8
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/Chip8.dir/link.d CMakeFiles/Chip8.dir/index.c.o CMakeFiles/Chip8.dir/graphics.c.o CMakeFiles/Chip8.dir/chip8.c.o -o Chip8  /usr/lib64/libSDL3.so.0.4.8

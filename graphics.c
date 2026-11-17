@@ -1,17 +1,16 @@
 #include "graphics.h"
-#include "SDL3/SDL.h"
-#include "SDL3/SDL_error.h"
-#include "SDL3/SDL_events.h"
-#include "SDL3/SDL_init.h"
-#include "SDL3/SDL_pixels.h"
-#include "SDL3/SDL_render.h"
-#include "SDL3/SDL_stdinc.h"
-#include "SDL3/SDL_timer.h"
-#include "SDL3/SDL_video.h"
 #include "chip8.h"
-#include "stdio.h"
-#include "string.h"
-#include <SDL3/SDL_rect.h>
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_error.h>
+#include <SDL3/SDL_events.h>
+#include <SDL3/SDL_init.h>
+#include <SDL3/SDL_pixels.h>
+#include <SDL3/SDL_render.h>
+#include <SDL3/SDL_stdinc.h>
+#include <SDL3/SDL_timer.h>
+#include <SDL3/SDL_video.h>
+#include <stdio.h>
+#include <string.h>
 
 #define ESCALA 10
 #define CICLOS_POR_CUADRO 10
@@ -29,7 +28,8 @@ void drawGfx(SDL_Renderer *renderer) {
   for (int y = 0; y < 32; y++) {
     for (int x = 0; x < 64; x++) {
       if (gfx[y * 64 + x]) {
-        SDL_FRect pixel = {(float)(x * ESCALA), (float)(y * ESCALA)};
+        SDL_FRect pixel = {(float)(x * ESCALA), (float)(y * ESCALA),
+                           ESCALA, ESCALA};
         SDL_RenderFillRect(renderer, &pixel);
       }
     }
@@ -39,9 +39,27 @@ void drawGfx(SDL_Renderer *renderer) {
 
 int graphics(void) {
 
-  SDL_Window *window = SDL_CreateWindow("CHIP8", 640, 320, 0);
+  if (!SDL_Init(SDL_INIT_VIDEO)) {
+    printf("Error: %s\n", SDL_GetError());
+    return 1;
+  }
 
-  SDL_Renderer *renderer = SDL_CreateRenderer(window, NULL);
+  SDL_Window *window = SDL_CreateWindow("CHIP8", 640, 320, 0); // Creacion de ventana
+
+  if (!window) {
+    printf("Error creando ventana: %s\n", SDL_GetError());
+    SDL_Quit();
+    return 1;
+  }
+
+  SDL_Renderer *renderer = SDL_CreateRenderer(window, NULL); // Creacion de renderer
+
+  if (!renderer) {
+    printf("Error creando renderer: %s\n", SDL_GetError());
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+    return 1;
+  }
 
   bool running = true;
   SDL_Event e;
@@ -60,7 +78,7 @@ int graphics(void) {
         }
 
         for (int i = 0; i < 16; i++) {
-          if (e.key.key == teclas[i]) {
+          if (e.key.key == teclas[i]) { // 
             key[i] = presionada;
           }
         }
@@ -75,6 +93,8 @@ int graphics(void) {
     drawGfx(renderer);
     SDL_Delay(MS_POR_CUADRO);
   }
+
+  // terminar correctamente la ventana sdl
 
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);

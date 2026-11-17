@@ -4,7 +4,7 @@ Chip8: \
   /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o \
   CMakeFiles/Chip8.dir/index.c.o \
   CMakeFiles/Chip8.dir/graphics.c.o \
-  CMakeFiles/Chip8.dir/utils.c.o \
+  CMakeFiles/Chip8.dir/chip8.c.o \
   /usr/lib64/libSDL3.so.0.4.8 \
   /usr/lib/gcc/x86_64-redhat-linux/15/libgcc.a \
   /usr/lib/gcc/x86_64-redhat-linux/15/libgcc_s.so \
@@ -39,7 +39,7 @@ CMakeFiles/Chip8.dir/index.c.o:
 
 CMakeFiles/Chip8.dir/graphics.c.o:
 
-CMakeFiles/Chip8.dir/utils.c.o:
+CMakeFiles/Chip8.dir/chip8.c.o:
 
 /usr/lib64/libSDL3.so.0.4.8:
 

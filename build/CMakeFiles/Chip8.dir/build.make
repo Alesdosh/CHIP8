@@ -100,32 +100,32 @@ CMakeFiles/Chip8.dir/graphics.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/Chip8.dir/graphics.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ales/Documentos/CHIP8/graphics.c -o CMakeFiles/Chip8.dir/graphics.c.s
 
-CMakeFiles/Chip8.dir/utils.c.o: CMakeFiles/Chip8.dir/flags.make
-CMakeFiles/Chip8.dir/utils.c.o: /home/ales/Documentos/CHIP8/utils.c
-CMakeFiles/Chip8.dir/utils.c.o: CMakeFiles/Chip8.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ales/Documentos/CHIP8/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Chip8.dir/utils.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Chip8.dir/utils.c.o -MF CMakeFiles/Chip8.dir/utils.c.o.d -o CMakeFiles/Chip8.dir/utils.c.o -c /home/ales/Documentos/CHIP8/utils.c
+CMakeFiles/Chip8.dir/chip8.c.o: CMakeFiles/Chip8.dir/flags.make
+CMakeFiles/Chip8.dir/chip8.c.o: /home/ales/Documentos/CHIP8/chip8.c
+CMakeFiles/Chip8.dir/chip8.c.o: CMakeFiles/Chip8.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ales/Documentos/CHIP8/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Chip8.dir/chip8.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Chip8.dir/chip8.c.o -MF CMakeFiles/Chip8.dir/chip8.c.o.d -o CMakeFiles/Chip8.dir/chip8.c.o -c /home/ales/Documentos/CHIP8/chip8.c
 
-CMakeFiles/Chip8.dir/utils.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/Chip8.dir/utils.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ales/Documentos/CHIP8/utils.c > CMakeFiles/Chip8.dir/utils.c.i
+CMakeFiles/Chip8.dir/chip8.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/Chip8.dir/chip8.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ales/Documentos/CHIP8/chip8.c > CMakeFiles/Chip8.dir/chip8.c.i
 
-CMakeFiles/Chip8.dir/utils.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/Chip8.dir/utils.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ales/Documentos/CHIP8/utils.c -o CMakeFiles/Chip8.dir/utils.c.s
+CMakeFiles/Chip8.dir/chip8.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/Chip8.dir/chip8.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ales/Documentos/CHIP8/chip8.c -o CMakeFiles/Chip8.dir/chip8.c.s
 
 # Object files for target Chip8
 Chip8_OBJECTS = \
 "CMakeFiles/Chip8.dir/index.c.o" \
 "CMakeFiles/Chip8.dir/graphics.c.o" \
-"CMakeFiles/Chip8.dir/utils.c.o"
+"CMakeFiles/Chip8.dir/chip8.c.o"
 
 # External object files for target Chip8
 Chip8_EXTERNAL_OBJECTS =
 
 Chip8: CMakeFiles/Chip8.dir/index.c.o
 Chip8: CMakeFiles/Chip8.dir/graphics.c.o
-Chip8: CMakeFiles/Chip8.dir/utils.c.o
+Chip8: CMakeFiles/Chip8.dir/chip8.c.o
 Chip8: CMakeFiles/Chip8.dir/build.make
 Chip8: CMakeFiles/Chip8.dir/compiler_depend.ts
 Chip8: /usr/lib64/libSDL3.so.0.4.8

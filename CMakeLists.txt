@@ -10,7 +10,6 @@ target_sources(Chip8
 	PRIVATE
 	 index.c	
 	 graphics.c
-	 utils.c
 	 chip8.c
 )
 

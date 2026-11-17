@@ -129,6 +129,30 @@ Chip8/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Chip8.dir/build.make CMakeFiles/Chip8.dir/build
 .PHONY : Chip8/fast
 
+chip8.o: chip8.c.o
+.PHONY : chip8.o
+
+# target to build an object file
+chip8.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Chip8.dir/build.make CMakeFiles/Chip8.dir/chip8.c.o
+.PHONY : chip8.c.o
+
+chip8.i: chip8.c.i
+.PHONY : chip8.i
+
+# target to preprocess a source file
+chip8.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Chip8.dir/build.make CMakeFiles/Chip8.dir/chip8.c.i
+.PHONY : chip8.c.i
+
+chip8.s: chip8.c.s
+.PHONY : chip8.s
+
+# target to generate assembly for a file
+chip8.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Chip8.dir/build.make CMakeFiles/Chip8.dir/chip8.c.s
+.PHONY : chip8.c.s
+
 graphics.o: graphics.c.o
 .PHONY : graphics.o
 
@@ -177,30 +201,6 @@ index.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Chip8.dir/build.make CMakeFiles/Chip8.dir/index.c.s
 .PHONY : index.c.s
 
-utils.o: utils.c.o
-.PHONY : utils.o
-
-# target to build an object file
-utils.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Chip8.dir/build.make CMakeFiles/Chip8.dir/utils.c.o
-.PHONY : utils.c.o
-
-utils.i: utils.c.i
-.PHONY : utils.i
-
-# target to preprocess a source file
-utils.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Chip8.dir/build.make CMakeFiles/Chip8.dir/utils.c.i
-.PHONY : utils.c.i
-
-utils.s: utils.c.s
-.PHONY : utils.s
-
-# target to generate assembly for a file
-utils.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Chip8.dir/build.make CMakeFiles/Chip8.dir/utils.c.s
-.PHONY : utils.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -210,15 +210,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Chip8"
+	@echo "... chip8.o"
+	@echo "... chip8.i"
+	@echo "... chip8.s"
 	@echo "... graphics.o"
 	@echo "... graphics.i"
 	@echo "... graphics.s"
 	@echo "... index.o"
 	@echo "... index.i"
 	@echo "... index.s"
-	@echo "... utils.o"
-	@echo "... utils.i"
-	@echo "... utils.s"
 .PHONY : help
 
 
